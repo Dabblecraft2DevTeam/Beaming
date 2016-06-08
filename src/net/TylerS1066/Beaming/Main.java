@@ -6,39 +6,32 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.entity.Player;
 
-public class Main extends JavaPlugin
-{
+public class Main extends JavaPlugin {
   	@Override
-    public void onEnable()
-    {
+    public void onEnable() {
   		
     }
     @Override
-    public void onDisable()
-    {
+    public void onDisable() {
        
     }
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args)
-    {
-        if (cmd.getName().equalsIgnoreCase("beam"))
-        {
-        	if(!(sender instanceof Player))
-            {
+    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+        if (cmd.getName().equalsIgnoreCase("beam")) {
+        	if(!(sender instanceof Player)) {
                 sender.sendMessage("Only players are allowed to use this command");
                 return false;
-            }
-            else
-            {
+            } else {
                 Player player = (Player) sender;
-                if(args.length == 1)
-                {
+                if(args.length == 1) {
                 	if(args[0].equalsIgnoreCase("scotty"))
                 		player.chat("Beam me up scotty!");
                 }
+                
+                player.leaveVehicle();//If not in a vehicle this will return false and have no effect
                 player.setHealth(0);
                 player.spigot().respawn();
-                sender.sendMessage("§1[§eBeaming§1] §cYou beamed to you ship!");
-                String message = "§1[§eBeaming§1]§c" + player.getDisplayName() + "§r§c beamed to their ship";
+                sender.sendMessage("Â§1[Â§eBeamingÂ§1] Â§cYou beamed to you ship!");
+                String message = "Â§1[Â§eBeamingÂ§1]Â§c" + player.getDisplayName() + "Â§rÂ§c beamed to their ship";
                 Bukkit.broadcastMessage(message);
             }
         	return true;
